@@ -57,6 +57,15 @@ see [program-g-code](https://github.com/Galen-Chu/program-g-code).
 
 ---
 
-## 📄 License
+## 📝 License
 
-MIT — see [LICENSE](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Galen Chu**
+
+- GitHub: [@Galen-Chu](https://github.com/Galen-Chu)
+- LinkedIn: [Galen Chu](https://www.linkedin.com/in/galen-chu-203590b5/)
