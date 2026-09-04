@@ -51,6 +51,7 @@ The `deploy` job in `.github/workflows/ci-cd.yml` only runs on pushes to `main`
 after lint, test, and docker-build all pass. Replace the placeholder step with
 your actual deployment (SSH, registry push, cloud provider CLI, etc.) and store
 any credentials as GitHub Actions secrets — never commit them.
+
 For a full CI/CD toolkit with lint, test, build, deploy, and rollback scripts,
 see [program-g-code](https://github.com/Galen-Chu/program-g-code).
 
