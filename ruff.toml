@@ -1,0 +1,8 @@
+# Ruff — replaces flake8 (lint) and adds a formatter (`ruff format`).
+# Line length carried over from the old .flake8 config.
+line-length = 100
+target-version = "py311"
+
+[lint]
+# Mirror flake8's default rule set: pycodestyle (E/W) + pyflakes (F).
+select = ["E", "F", "W"]
