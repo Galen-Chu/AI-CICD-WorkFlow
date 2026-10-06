@@ -83,10 +83,22 @@ jobs:
           IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_SHA}"
           docker pull "$IMAGE"
           docker run -d --name smoke -p 8000:8000 "$IMAGE"
-          response="$(curl -fsS --retry 15 --retry-delay 1 --retry-connrefused http://localhost:8000/health)"
-          echo "Health check response: $response"
-          echo "$response" | grep -q '"status":"ok"'
+          # While gunicorn is still starting, docker-proxy can reset
+          # connections (curl error 56) — --retry-connrefused does not
+          # cover that, so retry on any connection failure instead.
+          for i in $(seq 1 15); do
+            if response="$(curl -fsS http://localhost:8000/health)"; then
+              echo "Health check response: $response"
+              echo "$response" | grep -q '"status":"ok"'
+              docker rm -f smoke
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Container did not become healthy within 15s"
+          docker logs smoke || true
           docker rm -f smoke
+          exit 1
       - name: Deploy
         run: |
           echo "The sha-tagged image is built, pushed to GHCR, and verified."
